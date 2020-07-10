@@ -13,24 +13,18 @@ client.on("message", async message => {
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
 
-    if(command === "t"){
-
-        // Criar o isGameRunning?
-
-        const request = require("request")
-        const cheerio = require("cheerio")
-
-        request('https://www.palabrasaleatorias.com/palavras-aleatorias.php/', function(err, res, body){
-            if(err) console.log(`Um erro foi detectado.\n${err}`)
-
-            var body = cheerio.load(body)
-            body('table').each(function(){
-                var word = body(this).find('div')
-                console.log(word)
-            })
-        })
-
-    }
+     try {
+    let commandFile = require(`./cmds/${command}.js`);
+    
+    commandFile.run(client, message, args,)
+    client.channels.get('517487784139685899').send(new Discord.RichEmbed().setTitle('Comando usado :sim: ').addField("Comando:", `${command}`, true).addField("Autor:", `${message.author}`, true).addField("Canal:", `${message.channel}`, true).addField("ID da Mensagem:", `${message.id}`, true).addField("Servidor:", `${message.guild.name}`, true).addField("ID do Autor:", `${message.author.id}`, true).addField("Erros na execução do comando:", `Nenhum`, true).addField("Content:", `${message.content}`, true).setColor('0x000').setThumbnail(message.author.avatarURL).setFooter("Hitter • @DeadSad_").setTimestamp())  
+} catch (err) { 
+    client.channels.get('517487784139685899').send(new Discord.RichEmbed().setTitle('Comando usado :errado: ').addField("Comando:", `${command}`, true).addField("Autor:", `${message.author}`, true).addField("Canal:", `${message.channel}`, true).addField("ID da Mensagem:", `${message.id}`, true).addField("Servidor:", `${message.guild.name}`, true).addField("ID do Autor:", `${message.author.id}`, true).addField("Erros na execução do comando:", `${err}`, true).addField("Content:", `${message.content}`, true).setColor('0x000').setThumbnail(message.author.avatarURL).setFooter("Hitter • @DeadSad_").setTimestamp())
+   if(err.code != 'MODULE_NOT_FOUND'){
+     console.log(err)
+  } else if(err.code == 'MODULE_NOT_FOUND'){
+    message.channel.send({embed: {description: "Não consegui encontrar o comando, ⪧ Caso precise de ajuda digite `!help`", color: 0x000}});
+  }}
 
     })
 client.login(process.env.BOT_TOKEN)
