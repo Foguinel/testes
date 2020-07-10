@@ -19,7 +19,9 @@
   "homepage": "https://github.com/Foguinel/testes#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "discord.js": "^12.2.0",
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "request": "^2.88.2"
   }
 }
