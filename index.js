@@ -29,7 +29,6 @@ client.on("message", async message => {
     let commandFile = require(`./cmds/${command}.js`);
     
     commandFile.run(client, message, args)
-    client.channels.get('517487784139685899').send(new Discord.RichEmbed().setTitle('Comando usado :sim: ').addField("Comando:", `${command}`, true).addField("Autor:", `${message.author}`, true).addField("Canal:", `${message.channel}`, true).addField("ID da Mensagem:", `${message.id}`, true).addField("Servidor:", `${message.guild.name}`, true).addField("ID do Autor:", `${message.author.id}`, true).addField("Erros na execução do comando:", `Nenhum`, true).addField("Content:", `${message.content}`, true).setColor('0x000').setThumbnail(message.author.avatarURL).setFooter("Hitter • @DeadSad_").setTimestamp())  
 } catch (err) { 
    if(err.code != 'MODULE_NOT_FOUND'){
      console.log(err)
