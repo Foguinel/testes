@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
 
+const firebase = require("firebase")
+
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle</title>
+</head>
+<body>
+    <input type="text" placeholder="Insira o prefixo" id="prefixInput">
+    <br><br>
+    <button onclick="getPrefix()">Salvar alteração!</button>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: `${process.env.API_KEY}`,
+    authDomain: "testes-42dfa.firebaseapp.com",
+    databaseURL: "https://testes-42dfa.firebaseio.com",
+    projectId: "testes-42dfa",
+    storageBucket: "testes-42dfa.appspot.com",
+    messagingSenderId: "361208678918",
+    appId: "1:361208678918:web:7b319be02d6ee96b235187",
+    measurementId: "G-82LV27XHE7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+</script>
+
+    <script>
+    
+    function getPrefix(){
+        var prefixValue = document.getElementById("prefixInput").value
+        database.ref("Dados/Bot").set({
+            prefix: prefixValue
+        })
+        .then(console.log(prefix))
+    }
+
+    </script>
+</body>
+</html>
